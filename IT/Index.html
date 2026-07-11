@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>芯富发科技 - 創意“芯”跳加速中！</title>
+    <style>
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+            color: #2D3748;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(160, 174, 192, 0.2);
+            border: 3px solid #4F46E5;
+        }
+        header {
+            text-align: center;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            border-bottom: 2px dashed #E2E8F0;
+        }
+        .company-title {
+            font-size: 32px;
+            color: #4F46E5;
+            font-weight: 900;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #718096;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: #EDF2F7;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+        .slogan {
+            font-size: 22px;
+            color: #FF007A;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        section {
+            margin-bottom: 45px;
+        }
+        h2 {
+            color: #1A202C;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        h2::before {
+            content: "⚡";
+            margin-right: 10px;
+            font-size: 26px;
+        }
+        .about-text {
+            font-size: 16px;
+            line-height: 1.8;
+            background: #F8FAFC;
+            padding: 25px;
+            border-radius: 16px;
+            border-left: 6px solid #FF007A;
+            text-align: justify;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+        .service-card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 18px;
+            border: 2px solid #E2E8F0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: #4F46E5;
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.15);
+        }
+        .service-card h3 {
+            margin-top: 0;
+            color: #4F46E5;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+        .advantage-card {
+            background: #F4F5FF;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            border: 2px dashed #4F46E5;
+            transition: transform 0.2s;
+        }
+        .advantage-card:hover {
+            transform: scale(1.05);
+            background: #FFF5F7;
+            border-color: #FF007A;
+        }
+        .advantage-card h3 {
+            margin-top: 0;
+            color: #FF007A;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .advantage-card p {
+            margin: 5px 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: #4A5568;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="company-title">上海芯富发科技有限公司</div>
+        <div class="subtitle">SFF Specs From Fab</div>
+        <div class="slogan">让您的创意“芯”跳加速！从晶圆厂到您的定制规格，全流程一站式搞定！</div>
+    </header>
+
+    <section>
+        <h2>关于我们</h2>
+        <p class="about-text">
+            结合全球顶尖的芯片设计与工程服务理念，芯富发(SFF)是您最值得信赖的IC设计守护者！我们专注于提供深度定制化、高附加值的半导体设计方案。无论是最先进的制程节点、第三代半导体材料，还是最前沿的异构封装技术，我们都能将您的创新蓝图，精准转化为极具市场竞争力的卓越硅片，全面助力企业实现跨越式增长。
+        </p>
+    </section>
+
+    <section>
+        <h2>全栈式IC设计與工程服務 (Full-Stack Services)</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>🚀 ASIC/SoC 全流程定制</h3>
+                <p>从架构定义(Spec)、RTL设计、验证到前端综合与后端物理设计，涵盖至3nm/5nm 先进制程。为AI、物联网提供高性能、低功耗的最佳架构。</p>
+            </div>
+            <div class="service-card">
+                <h3>🔋 电源与射频器件模组开发</h3>
+                <p>全面覆盖 Si、GaN与SiC。提供从器件建模、版图设计到射频前端(RFFE)、高功率微波模组及高效电源管理(PMIC)的全栈式调优。</p>
+            </div>
+            <div class="service-card">
+                <h3>📦 前沿「先进封装」与芯粒技术</h3>
+                <p>打破摩尔定律！提供业界领先的2.5D/3D IC、CoWoS 以及 Chiplet (芯粒)异构集成设计。在超小体积内实现系统算力的疯狂飙升。</p>
+            </div>
+            <div class="service-card">
+                <h3>💻 神级EDA 算力与环境支持</h3>
+                <p>完美攻克复杂工具链！提供最高效的设计环境搭建(CAD Flow)、云端多核算力集群部署与 Workflow 自动化加速，彻底释放您的研发潜能。</p>
+            </div>
+            <div class="service-card">
+                <h3>🔑 高规格 IP 授权与系统集成</h3>
+                <p>无缝整合全球顶尖第三方IP(包含PCIe, DDR等高速接口及模拟IP)，提供高度定制化的子系统集成方案，大幅缩短开发周期。</p>
+            </div>
+            <div class="service-card">
+                <h3>🎁 无缝 Turn-Key 一站式交付</h3>
+                <p>全面打通半导体供应链！涵盖 MPW/NTO 晶圆制造、高精密封装、CP/FT测试与物流管理。全生命周期把控，您只需安心等待优质芯片送达！</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>我們的核心優勢</h2>
+        <div class="advantages-grid">
+            <div class="advantage-card">
+                <h3>✨ 敏捷交付</h3>
+                <p>超高迭代速度</p>
+                <p>搶占市場先機</p>
+            </div>
+            <div class="advantage-card">
+                <h3>🔮 成本魔法</h3>
+                <p>极致 PPA 优化</p>
+                <p>提升利润空间</p>
+            </div>
+            <div class="advantage-card">
+                <h3>🛡️ 品质稳固</h3>
+                <p>严苛 DFM 规范</p>
+                <p>保障超高良率</p>
+            </div>
+            <div class="advantage-card">
+                <h3>🙌 创新陪伴</h3>
+                <p>有趣专业的团队</p>
+                <p>一路护航到底</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>

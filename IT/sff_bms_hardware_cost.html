@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFF BMS Hardware Cost</title>
+    <!-- 引入 Tailwind CSS 用於快速且現代的 UI 設計 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 React 核心庫 -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <!-- 引入 Babel 以便在瀏覽器中直接解析 JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+        /* 自定義滾動條樣式 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useMemo } = React;
+
+        const App = () => {
+            // 全局基礎設定狀態
+            const [baseBOM, setBaseBOM] = useState(800);
+            const [baseMargin, setBaseMargin] = useState(18);
+
+            // 各核心元器件設定狀態 (權重總和為 72%，剩餘 28% 為 PCB/SMT/其他)
+            const [components, setComponents] = useState([
+                { id: 'afe', name: 'AFE 採樣晶片', weight: 0.30, subRate: 0, discount: 0 },
+                { id: 'mcu', name: '主控 MCU', weight: 0.20, subRate: 0, discount: 0 },
+                { id: 'iso', name: '隔離與數位隔離器', weight: 0.12, subRate: 0, discount: 0 },
+                { id: 'pwr', name: '功率器件 (MOS/IGBT)', weight: 0.10, subRate: 0, discount: 0 }
+            ]);
+
+            // 計算其他固定成本權重
+            const otherWeight = 1 - components.reduce((acc, c) => acc + c.weight, 0);
+
+            // 更新元件狀態函數
+            const handleCompChange = (id, field, value) => {
+                setComponents(components.map(c => 
+                    c.id === id ? { ...c, [field]: Number(value) } : c
+                ));
+            };
+
+            // 動態計算核心邏輯
+            const results = useMemo(() => {
+                let totalNewCost = baseBOM * otherWeight;
+                const details = components.map(c => {
+                    const origCost = baseBOM * c.weight;
+                    // 新成本 = 原成本 * (1 - (國產化比例 * 預期降幅))
+                    const newCost = origCost * (1 - (c.subRate / 100) * (c.discount / 100));
+                    totalNewCost += newCost;
+                    return { ...c, origCost, newCost };
+                });
+
+                // 基於原BOM成本和原毛利率，推算產品出貨售價 (假設售價固定)
+                const sellingPrice = baseBOM / (1 - baseMargin / 100);
+                
+                // 節省金額
+                const saved = baseBOM - totalNewCost;
+                
+                // 新毛利率 = (售價 - 新成本) / 售價
+                const newMargin = ((sellingPrice - totalNewCost) / sellingPrice) * 100;
+
+                return { details, totalNewCost, saved, newMargin, sellingPrice };
+            }, [baseBOM, baseMargin, components, otherWeight]);
+
+            return (
+                <div className="min-h-screen pb-12">
+                    {/* Header */}
+                    <header className="bg-slate-900 text-white py-6 shadow-md">
+                        <div className="max-w-6xl mx-auto px-6">
+                            <h2 className="text-sm font-semibold text-blue-400 tracking-wider uppercase mb-1">上海芯富發科技有限公司</h2>
+                            <h1 className="text-3xl font-bold">BMS 硬體 BOM 成本與國產化替代模擬器</h1>
+                            <p className="text-slate-400 mt-2">SFF BMS Hardware Cost & Localization Simulator</p>
+                        </div>
+                    </header>
+
+                    <main className="max-w-6xl mx-auto px-6 mt-8">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                            
+                            {/* 左側：控制面板 */}
+                            <div className="lg:col-span-7 space-y-6">
+                                {/* 基礎參數設定 */}
+                                <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                                    <h3 className="text-lg font-bold text-slate-800 border-b pb-3 mb-4 flex items-center">
+                                        <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                        全局基礎設定 (Base Parameters)
+                                    </h3>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                        <div>
+                                            <label className="block text-sm font-medium text-slate-600 mb-2">基礎 BOM 總成本 (RMB)</label>
+                                            <input 
+                                                type="number" 
+                                                value={baseBOM}
+                                                onChange={(e) => setBaseBOM(Number(e.target.value))}
+                                                className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium text-slate-600 mb-2">當前整體毛利率 (%)</label>
+                                            <input 
+                                                type="number" 
+                                                value={baseMargin}
+                                                onChange={(e) => setBaseMargin(Number(e.target.value))}
+                                                className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* 元器件國產化替代模擬 */}
+                                <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                                    <h3 className="text-lg font-bold text-slate-800 border-b pb-3 mb-6 flex items-center">
+                                        <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                                        核心器件國產替代策略設定
+                                    </h3>
+                                    
+                                    <div className="space-y-8">
+                                        {components.map(comp => (
+                                            <div key={comp.id} className="p-4 rounded-lg border border-slate-100 bg-slate-50 hover:bg-slate-100 transition-colors">
+                                                <div className="flex justify-between items-center mb-4">
+                                                    <h4 className="font-semibold text-slate-800">{comp.name}</h4>
+                                                    <span className="text-xs font-bold px-2 py-1 bg-blue-100 text-blue-700 rounded-full">
+                                                        權重: {(comp.weight * 100).toFixed(0)}%
+                                                    </span>
+                                                </div>
+                                                
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                    {/* 國產化替換率 */}
+                                                    <div>
+                                                        <div className="flex justify-between mb-1">
+                                                            <label className="text-xs font-medium text-slate-500">國產化導入比例</label>
+                                                            <span className="text-xs font-bold text-blue-600">{comp.subRate}%</span>
+                                                        </div>
+                                                        <input 
+                                                            type="range" 
+                                                            min="0" max="100" 
+                                                            value={comp.subRate} 
+                                                            onChange={(e) => handleCompChange(comp.id, 'subRate', e.target.value)}
+                                                            className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                                                        />
+                                                    </div>
+                                                    
+                                                    {/* 預期降價幅度 */}
+                                                    <div>
+                                                        <div className="flex justify-between mb-1">
+                                                            <label className="text-xs font-medium text-slate-500">預期單價降幅 (相較外購)</label>
+                                                            <span className="text-xs font-bold text-emerald-600">{comp.discount}%</span>
+                                                        </div>
+                                                        <input 
+                                                            type="range" 
+                                                            min="0" max="100" 
+                                                            value={comp.discount} 
+                                                            onChange={(e) => handleCompChange(comp.id, 'discount', e.target.value)}
+                                                            className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* 右側：分析結果與圖表 */}
+                            <div className="lg:col-span-5 space-y-6">
+                                <div className="bg-slate-900 rounded-xl shadow-lg border border-slate-800 overflow-hidden sticky top-6">
+                                    <div className="p-6">
+                                        <h3 className="text-lg font-bold text-white mb-6">成本效益分析報告</h3>
+                                        
+                                        <div className="grid grid-cols-2 gap-4 mb-6">
+                                            <div className="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                                                <p className="text-slate-400 text-xs uppercase tracking-wider mb-1">優化後總 BOM 成本</p>
+                                                <p className="text-2xl font-bold text-white">¥ {results.totalNewCost.toFixed(1)}</p>
+                                                <p className="text-xs text-slate-400 mt-1 line-through">原: ¥ {baseBOM.toFixed(1)}</p>
+                                            </div>
+                                            <div className="bg-slate-800 p-4 rounded-lg border border-emerald-900/50 relative overflow-hidden">
+                                                <div className="absolute top-0 right-0 w-16 h-16 bg-emerald-500 opacity-10 rounded-bl-full"></div>
+                                                <p className="text-slate-400 text-xs uppercase tracking-wider mb-1">單套節省金額</p>
+                                                <p className="text-2xl font-bold text-emerald-400">¥ {results.saved.toFixed(1)}</p>
+                                                <p className="text-xs text-emerald-500 mt-1">
+                                                    降幅: {((results.saved / baseBOM) * 100).toFixed(1)}%
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="bg-blue-600 p-5 rounded-lg text-center mb-6 shadow-inner">
+                                            <p className="text-blue-200 text-sm font-medium mb-1">預估新毛利率 (假設終端售價不變)</p>
+                                            <div className="flex items-end justify-center">
+                                                <span className="text-4xl font-extrabold text-white">{results.newMargin.toFixed(1)}</span>
+                                                <span className="text-xl text-blue-200 font-bold ml-1 mb-1">%</span>
+                                            </div>
+                                            <p className="text-xs text-blue-300 mt-2">
+                                                原毛利: {baseMargin.toFixed(1)}% | 提升: {(results.newMargin - baseMargin).toFixed(1)}%
+                                            </p>
+                                        </div>
+
+                                        <div className="space-y-3">
+                                            <h4 className="text-sm font-semibold text-slate-300 border-b border-slate-700 pb-2 mb-3">各模組成本對比明細</h4>
+                                            {results.details.map(comp => (
+                                                <div key={comp.id} className="flex justify-between items-center text-sm">
+                                                    <span className="text-slate-400">{comp.name}</span>
+                                                    <div className="text-right">
+                                                        {comp.newCost < comp.origCost ? (
+                                                            <>
+                                                                <span className="text-slate-500 line-through mr-2">¥{comp.origCost.toFixed(1)}</span>
+                                                                <span className="text-emerald-400 font-bold">¥{comp.newCost.toFixed(1)}</span>
+                                                            </>
+                                                        ) : (
+                                                            <span className="text-white font-medium">¥{comp.origCost.toFixed(1)}</span>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                            <div className="flex justify-between items-center text-sm pt-2 border-t border-slate-700">
+                                                <span className="text-slate-400">PCB/製造/其他固定物料</span>
+                                                <span className="text-white font-medium">¥{(baseBOM * otherWeight).toFixed(1)}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="bg-slate-800 px-6 py-4 border-t border-slate-700">
+                                        <p className="text-xs text-slate-400 leading-relaxed text-center">
+                                            此模型基於假設出貨終端產品單價 (¥{results.sellingPrice.toFixed(1)}) 保持不變為前提計算。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </main>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
