@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>技術服務 & IP - 上海芯富发科技有限公司</title>
+<style>
+  /* Reset & Base Styles */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft JhengHei", sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: #38bdf8;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  /* Layout Container */
+  .container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Navigation Header */
+  header {
+    background-color: #0f172a;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 3px solid #06b6d4;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+  }
+
+  .logo-box {
+    display: inline-block;
+    border: 2px solid #06b6d4;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #06b6d4;
+  }
+  
+  .logo-box span {
+    color: #ffffff;
+  }
+
+  nav a {
+    color: #cbd5e1;
+    font-weight: 500;
+    font-size: 15px;
+    margin-left: 20px;
+    padding: 6px 12px;
+    border-radius: 4px;
+  }
+
+  nav a:hover, nav a.active {
+    color: #ffffff;
+    background-color: #1e293b;
+    border-bottom: 2px solid #06b6d4;
+  }
+
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    color: #ffffff;
+    padding: 50px 0;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .hero p {
+    font-size: 16px;
+    color: #38bdf8;
+    font-weight: 500;
+  }
+
+  /* Main Content Area */
+  main {
+    padding: 40px 0;
+  }
+
+  section {
+    margin-bottom: 50px;
+  }
+
+  h2 {
+    font-size: 22px;
+    color: #1e3a8a;
+    border-left: 5px solid #06b6d4;
+    padding-left: 12px;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  .intro-text {
+    font-size: 15px;
+    color: #475569;
+    text-align: justify;
+    line-height: 1.8;
+    background-color: #ffffff;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border: 1px solid #e2e8f0;
+    margin-bottom: 30px;
+  }
+
+  /* Responsive Table Wrapper */
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    margin: 20px 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 600px;
+  }
+
+  th {
+    background-color: #1e3a8a;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 14px 18px;
+  }
+
+  td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 14px;
+    color: #334155;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f1f5f9;
+  }
+
+  /* Core Tech Block */
+  .tech-block {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+
+  .tech-block h3 {
+    font-size: 18px;
+    color: #0f172a;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tech-block h3::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #06b6d4;
+    border-radius: 50%;
+  }
+
+  .tech-block p {
+    font-size: 14px;
+    color: #475569;
+    line-height: 1.6;
+  }
+
+  /* Footer Section */
+  footer {
+    background-color: #0f172a;
+    color: #ffffff;
+    padding: 40px 0;
+    border-top: 4px solid #06b6d4;
+    margin-top: 50px;
+  }
+
+  .footer-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  @media (min-width: 768px) {
+    .footer-grid {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .footer-contact-info {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #cbd5e1;
+  }
+
+  .footer-contact-info strong {
+    color: #ffffff;
+    font-size: 16px;
+  }
+
+  .footer-contact-info a {
+    color: #38bdf8;
+    font-weight: 700;
+  }
+
+  .footer-slogan {
+    text-align: left;
+  }
+
+  @media (min-width: 768px) {
+    .footer-slogan {
+      text-align: right;
+    }
+  }
+
+  .footer-slogan h4 {
+    font-size: 18px;
+    color: #38bdf8;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .footer-slogan p {
+    font-size: 13px;
+    color: #94a3b8;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container nav-container">
+      <div class="logo-box">SF<span>FIC</span></div>
+      <nav>
+        <a href="index.html">首頁 / 關於我們</a>
+        <a href="technology.html" class="active">技術服務 & IP</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>技術服務與矽智財 (IP) 整合</h1>
+      <p>先進一站式芯片開發與多維度矽智財生態圈</p>
+    </div>
+  </section>
+
+  <!-- Main Content Area -->
+  <main class="container">
+    
+    <!-- Technology Overview -->
+    <section>
+      <h2>晶片設計與整合流程</h2>
+      <p class="intro-text">
+        芯富发提供從概念規格至量產芯片的全鏈條服務。我們熟稔於先進製程的物理特性與佈局規範，能有效克服低功耗（Low Power）、高頻寬（High Bandwidth）與高散熱等物理極限挑戰。
+      </p>
+
+      <div class="tech-block">
+        <h3>1. 系統架構與前端設計 (Front-End)</h3>
+        <p>提供客製化演算法優化、IP 選型評估、SoC 整合與高性能子系統設計，配合先進仿真測試平台（UVM 驗證環境）確保邏輯功能無瑕疵。</p>
+      </div>
+
+      <div class="tech-block">
+        <h3>2. 進階實體佈局設計 (APR Back-End)</h3>
+        <p>具備從網表（Netlist）至圖形文件（GDSII）的完整流程實作能力。在先進製程（28奈米至5奈米）擁有豐富經驗，能提供精準的時序收斂、信號完整性與電源完整性分析（SI/PI）。</p>
+      </div>
+
+      <div class="tech-block">
+        <h3>3. DFT 可測試性工程設計</h3>
+        <p>全方位導入 Scan Chain, Memory BIST, Boundary Scan 等可測試性結構，有效確保量產階段晶圓測試（CP）與成品測試（FT）的測試覆蓋率及成本最優化。</p>
+      </div>
+    </section>
+
+    <!-- IP Platform Section -->
+    <section>
+      <h2>矽智財 (IP) 客製化整合平台</h2>
+      <p class="intro-text" style="margin-bottom: 15px; box-shadow: none; border: none; padding: 0; background: transparent;">
+        芯富发提供全方位的 IP 整合解決方案，確保與全球一線代工廠製程相容。不論是高速傳輸、處理器、類比訊號或基礎單元，皆能無縫集成至您的晶片中：
+      </p>
+      
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 30%;">IP 類別</th>
+              <th style="width: 70%;">支援規格與技術解決方案</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight: bold; color: #1e3a8a;">處理器內核 (CPU/DSP)</td>
+              <td>主流高效能與低功耗處理器內核、RISC-V 全系列架構集成</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #1e3a8a;">高速傳輸介面 (Interface)</td>
+              <td>PCIe Gen4/5, USB 3.2/4, DDR4/5, LPDDR4X/5, MIPI D/C-PHY, Ethernet</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #1e3a8a;">類比與混合訊號 (Analog)</td>
+              <td>High-Speed ADC/DAC, PLL, LDO, Temperature Sensor, PMU</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #1e3a8a;">基礎 IP & 安全 (Security)</td>
+              <td>Standard Cell Library, SRAM, OTP/MTP, Crypto Engine, PUF 安全防禦</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-contact-info">
+          <strong>上海芯富发科技有限公司 (SFFIC)</strong><br>
+          技術與商務諮詢：<a href="mailto:fae@sffic.com">fae@sffic.com</a><br>
+          服務網址：<a href="http://www.sffic.com" target="_blank">www.sffic.com</a><br>
+          地址：上海市浦東新區張江高科技園區半導體產業園
+        </div>
+        <div class="footer-slogan">
+          <h4>您的晶片，我們的使命</h4>
+          <p>SFFIC 一站式 ASIC 領航者</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

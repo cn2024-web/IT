@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>上海芯富发科技有限公司 - 領先的 ASIC & SoC 一站式服務專家</title>
+<style>
+  /* Reset & Base Styles */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft JhengHei", sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: #38bdf8;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  /* Layout Container */
+  .container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Navigation Header */
+  header {
+    background-color: #0f172a;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 3px solid #06b6d4;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+  }
+
+  .logo-box {
+    display: inline-block;
+    border: 2px solid #06b6d4;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #06b6d4;
+  }
+  
+  .logo-box span {
+    color: #ffffff;
+  }
+
+  nav a {
+    color: #cbd5e1;
+    font-weight: 500;
+    font-size: 15px;
+    margin-left: 20px;
+    padding: 6px 12px;
+    border-radius: 4px;
+  }
+
+  nav a:hover, nav a.active {
+    color: #ffffff;
+    background-color: #1e293b;
+    border-bottom: 2px solid #06b6d4;
+  }
+
+  /* Hero Banner */
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    color: #ffffff;
+    padding: 60px 0;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .hero p {
+    font-size: 16px;
+    color: #38bdf8;
+    font-weight: 500;
+    max-width: 700px;
+    margin: 0 auto 25px auto;
+  }
+
+  .btn {
+    display: inline-block;
+    background-color: #06b6d4;
+    color: #ffffff;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: background 0.2s ease;
+  }
+
+  .btn:hover {
+    background-color: #0891b2;
+    color: #ffffff;
+  }
+
+  /* Main Content Area */
+  main {
+    padding: 40px 0;
+  }
+
+  section {
+    margin-bottom: 50px;
+  }
+
+  h2 {
+    font-size: 22px;
+    color: #1e3a8a;
+    border-left: 5px solid #06b6d4;
+    padding-left: 12px;
+    margin-bottom: 25px;
+    font-weight: 700;
+  }
+
+  .intro-text {
+    font-size: 15px;
+    color: #475569;
+    text-align: justify;
+    line-height: 1.8;
+    background-color: #ffffff;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border: 1px solid #e2e8f0;
+  }
+
+  /* Responsive Grid System (Mobile First) */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  @media (min-width: 768px) {
+    .grid-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Cards */
+  .card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 24px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #06b6d4;
+    padding-bottom: 8px;
+  }
+
+  .card-content {
+    font-size: 14px;
+    color: #475569;
+  }
+
+  .card-content ul {
+    list-style-type: none;
+  }
+
+  .card-content li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 18px;
+  }
+
+  .card-content li::before {
+    content: "•";
+    color: #06b6d4;
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    left: 0;
+    top: -3px;
+  }
+
+  /* Highlight Banner */
+  .highlight-banner {
+    background-color: #ecfeff;
+    border: 1px solid #a5f3fc;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 35px 0;
+  }
+
+  .highlight-banner h3 {
+    margin-bottom: 10px;
+    color: #0891b2;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .highlight-banner p {
+    font-size: 14px;
+    color: #0e7490;
+    line-height: 1.6;
+  }
+
+  /* Footer Section */
+  footer {
+    background-color: #0f172a;
+    color: #ffffff;
+    padding: 40px 0;
+    border-top: 4px solid #06b6d4;
+  }
+
+  .footer-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  @media (min-width: 768px) {
+    .footer-grid {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .footer-contact-info {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #cbd5e1;
+  }
+
+  .footer-contact-info strong {
+    color: #ffffff;
+    font-size: 16px;
+  }
+
+  .footer-contact-info a {
+    color: #38bdf8;
+    font-weight: 700;
+  }
+
+  .footer-slogan {
+    text-align: left;
+  }
+
+  @media (min-width: 768px) {
+    .footer-slogan {
+      text-align: right;
+    }
+  }
+
+  .footer-slogan h4 {
+    font-size: 18px;
+    color: #38bdf8;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .footer-slogan p {
+    font-size: 13px;
+    color: #94a3b8;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container nav-container">
+      <div class="logo-box">SF<span>FIC</span></div>
+      <nav>
+        <a href="index.html" class="active">首頁 / 關於我們</a>
+        <a href="technology.html">技術服務 & IP</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>上海芯富发科技有限公司</h1>
+      <p>領先的 ASIC & SoC 一站式設計與量產 Turnkey 服務專家</p>
+      <a href="technology.html" class="btn">探索核心技術與 IP</a>
+    </div>
+  </section>
+
+  <!-- Main Content Area -->
+  <main class="container">
+    
+    <!-- About Section -->
+    <section>
+      <h2>關於芯富发 (SFFIC)</h2>
+      <p class="intro-text">
+        上海芯富发科技有限公司（SFFIC）是業界領先的客製化積體電路（ASIC）與系統單晶片（SoC）設計服務提供商。我們擁有先進的一站式晶片設計及量產服務流程，與全球頂尖晶圓代工廠及一線封測廠緊密合作，為客戶提供從規格制定、RTL 設計、矽智財（IP）整合、實體佈局設計（APR），到晶圓投片、封裝及測試（Turnkey）的完整解決方案，致力於為客戶提供最高良率、最具成本效益的極致設計服務。
+      </p>
+    </section>
+
+    <!-- Core Services Section -->
+    <section>
+      <h2>核心服務範疇 (Core Services)</h2>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">ASIC / SoC 設計服務 (NRE)</div>
+          <div class="card-content">
+            <ul>
+              <li>規格評估與系統架構優化設計</li>
+              <li>RTL 程式碼撰寫、子系統整合及功能驗證</li>
+              <li>先進 EDA 工具鏈實體佈局繞線設計 (APR)</li>
+              <li>低功耗 (Low-Power) 優化設計與分析</li>
+              <li>可測試性設計 (DFT: Scan, MBIST, Boundary Scan)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">一站式 Turnkey 量產服務 (MP)</div>
+          <div class="card-content">
+            <ul>
+              <li>晶圓廠投片（提供 CyberShuttle/MPW 及全光罩製作）</li>
+              <li>先進封裝技術整合（SiP、CoWoS 等晶圓級封裝）</li>
+              <li>客製化測試程式開發、晶圓測試 (CP) 與成品測試 (FT)</li>
+              <li>可靠度驗證、失效分析 (FA) 與良率提升服務</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Highlight Section -->
+    <section class="highlight-banner">
+      <h3>晶圓代工策略聯盟與先進製程支持</h3>
+      <p>
+        芯富发科技與主流晶圓代工廠建立緊密的技術聯盟，設計能力涵蓋成熟製程（0.18微米、90奈米、40奈米）到領先的先進製程（28奈米、16奈米、7奈米、5奈米及以下），能滿足各種高性能、低功耗的複雜晶片客製化需求。
+      </p>
+    </section>
+
+    <!-- Applications Section -->
+    <section>
+      <h2>熱門應用領域 (Target Applications)</h2>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">AI 與高性能計算 (HPC)</div>
+          <div class="card-content">
+            支持深度學習加速晶片、高吞吐量資料處理，提供先進 2.5D/3D 封裝設計，滿足大數據計算之極致頻寬。
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">車載與工業級晶片</div>
+          <div class="card-content">
+            支持功能安全、車規驗證標準。專注於高可靠性車載控制與工控通訊晶片。
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">智慧物聯網 (AIoT)</div>
+          <div class="card-content">
+            極致超低功耗設計流程，支持無線射頻與基頻一體化 SoC，大幅延長邊緣運算裝置之電池壽命。
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">消費電子與智慧醫療</div>
+          <div class="card-content">
+            快速打樣投片，縮短開發週期。涵蓋智慧穿戴、影像處理、醫療感測與客製化特殊功能晶片。
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-contact-info">
+          <strong>上海芯富发科技有限公司 (SFFIC)</strong><br>
+          技術與商務諮詢：<a href="mailto:fae@sffic.com">fae@sffic.com</a><br>
+          服務網址：<a href="http://www.sffic.com" target="_blank">www.sffic.com</a><br>
+          地址：上海市浦東新區張江高科技園區半導體產業園
+        </div>
+        <div class="footer-slogan">
+          <h4>您的晶片，我們的使命</h4>
+          <p>SFFIC 一站式 ASIC 領航者</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
